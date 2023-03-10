@@ -22,11 +22,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private List<Work> listWorks = new ArrayList<>();
+    private List<Work> listFilter = new ArrayList<>();
     private WorkAdapter adapter;
     private ListView listView;
 
-    private Button btnDelete, btnUpdate, btnAdd, btnDate;
-    private EditText textTen,textNoiDung;
+    private Button btnDelete, btnUpdate, btnAdd, btnDate, btnSearch;
+    private EditText textTen,textNoiDung, search;
 
     private TextView ngay;
 
@@ -40,16 +41,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listView);
         listWorks.add(new Work("diep", "noidung", "Nam", "20/2/2023"));
-        listWorks.add(new Work("diepp", "noidung", "Nu", "20/2/2023"));
+        listWorks.add(new Work("aidoinmyheart", "noidung", "Nu", "20/2/2023"));
         textTen = findViewById(R.id.inputTenCV);
         ngay = findViewById(R.id.textViewNgay);
         textNoiDung = findViewById(R.id.inputNoiDung);
         gioiTinh = findViewById(R.id.gioiTinh);
+        search = findViewById(R.id.search);
         btnAdd = findViewById(R.id.btnAdd);
         btnDate = findViewById(R.id.btnDate);
         btnDelete = findViewById(R.id.btnDelete);
         btnUpdate = findViewById(R.id.btnUpdate);
-
+        btnSearch = findViewById(R.id.btnSearch);
 
 //        Date btn
         btnDate.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +137,22 @@ public class MainActivity extends AppCompatActivity {
                     listWorks.set( selectedItemPosition,new Work(ten, noidung, buttonGioiTinh.getText().toString(), ngayChon));
                     initView();
                 }
+            }
+        });
+
+//        Search
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listFilter = new ArrayList<>();
+                for (int i = 0; i < listWorks.size(); i++ ){
+                    if (listWorks.get(i).getNoidung().contains(search.getText().toString()) || listWorks.get(i).getTen().contains(search.getText().toString())) {
+                        listFilter.add(listWorks.get(i));
+                    }
+                }
+                adapter = new WorkAdapter(MainActivity.this, listFilter);
+                listView.setAdapter(adapter);
             }
         });
 

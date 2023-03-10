@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listView);
         listWorks.add(new Work("diep", "noidung", "Nam", "20/2/2023"));
-        listWorks.add(new Work("khuexinh", "noidung", "Nu", "20/2/2023"));
+        listWorks.add(new Work("diepp", "noidung", "Nu", "20/2/2023"));
         textTen = findViewById(R.id.inputTenCV);
         ngay = findViewById(R.id.textViewNgay);
         textNoiDung = findViewById(R.id.inputNoiDung);
